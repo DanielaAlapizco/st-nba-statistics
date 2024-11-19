@@ -1,0 +1,64 @@
+!pip install streamlit -q
+!pip install kagglehub -q
+
+%%writefile app.py
+import streamlit as st
+import requests
+import pandas as pd
+from bs4 import BeautifulSoup
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+import plotly.express as px
+from collections import Counter
+df= pd.read_csv('nbadata.csv')
+df.head()
+draft_year = 'draft_year'
+draft_round = 'draft_round'
+draft_number = 'draft_number'
+# Data base without USA country
+df2 = df[df['country'] != 'USA']
+df2.head()
+
+#Page
+st.title("NBA statistics")
+st.header("Data set")
+#Show Data Set
+st.text('In this data set we can find different information about different players from the NBA')
+st.write('Here is the data set',df)
+
+md = df['age'].mean()
+mdM = df['age'].max()
+mdm = df['age'].min()
+st.markdown(f"*The maximum age of the players is:* {mdM}")
+st.markdown(f"*Mean of age of the players is:* {md}")
+st.markdown(f"*The minimum age of the players is:* {mdm}")
+
+#Bar chart
+# Contar la frecuencia de cada equipo
+contador_equipos = Counter('team_abbreviation')
+
+# Seleccionar los 10 equipos más comunes
+equipos_mas_comunes = contador_equipos.most_common(10)
+
+# Separar los nombres y las frecuencias
+nombres_equipos = [equipo[0] for equipo in equipos_mas_comunes]
+frecuencias = [equipo[1] for equipo in equipos_mas_comunes]
+
+# Crear la gráfica de barras
+fig, ax = plt.subplots()
+ax.bar(nombres_equipos, frecuencias, color='skyblue')
+ax.set_xlabel('Equipos')
+ax.set_ylabel('Frecuencia')
+ax.set_title('Top 10 Equipos Más Repetidos')
+plt.xticks(rotation=45)
+
+# Mostrar la gráfica en Streamlit
+st.pyplot(fig)
+# Caption with name and emoji
+st.caption("Created by Daniela Alapizco😊")
+
+!npm install -g localtunnel
+
+! streamlit run app.py &>logs.txt & npx localtunnel --port 8501
