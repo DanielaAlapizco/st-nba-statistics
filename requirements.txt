@@ -1,0 +1,8 @@
+streamlit
+streamlit-option-menu
+requests
+pandas
+beautifulsoup4
+seaborn
+matplotlib
+plotly
