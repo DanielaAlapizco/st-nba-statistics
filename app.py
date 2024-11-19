@@ -42,7 +42,7 @@ st.markdown("""
 st.markdown('<h1 class="titulo-TITULO">NBA Statistics</h1>', unsafe_allow_html=True)
 st.markdown('<p class="texto-NOMBRE">Daniela Alapizco.</p>', unsafe_allow_html=True)
 
-with open('/content/waves.css') as f: #Es necesario subirlo en content
+with open('waves.css') as f: #Es necesario subirlo en content
     css = f.read()
 st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
