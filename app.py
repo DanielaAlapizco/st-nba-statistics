@@ -52,7 +52,7 @@ st.markdown('<p class="dashboard_title">A Random App</p>', unsafe_allow_html = T
 st.markdown('<p class="dashboard_subtitle">Look at the pretty waves</p>', unsafe_allow_html = True)
 
 # Horizontal Menu
-menu_selected = option_menu(None, ["Home", "EDA", "Insights", 'Prediction'],
+menu_selected = option_menu(None, ["Home", "Insights", 'Prediction'],
     icons=['house', 'cloud-upload', "list-task", 'gear'],
     menu_icon="cast", default_index=0, orientation="horizontal",
         styles={
@@ -62,29 +62,6 @@ menu_selected = option_menu(None, ["Home", "EDA", "Insights", 'Prediction'],
         "nav-link-selected": {"background-color": "#7A577A"},
     }
 )
-
-if menu_selected=="EDA":
-    st.write("The EDA page")
-    df= pd.read_csv('nbadata.csv')
-    df.head()
-    draft_year = 'draft_year'
-    draft_round = 'draft_round'
-    draft_number = 'draft_number'
-    # Data base without USA country
-    df2 = df[df['country'] != 'USA']
-    df2.head()
-    #Get the statistics
-    st.subheader("Statistics")
-    st.write(df.describe())
-    # Plotly distribution chart of a single column
-    st.markdown()
-    fig1 = px.histogram(df, x='college', title='Distribution of College')
-    st.plotly_chart(fig1)
-    # Seaborn scatter plot for two columns
-    fig2, ax = plt.subplots()
-    sns.scatterplot(data=df, hue='age', x='team_abbreviation', y='draft_round', ax=ax)
-    ax.set_title("Scatter Plot of age vs country")
-    st.pyplot(fig2)
 
 if menu_selected=="Insights":
     st.write("The Insights page")
